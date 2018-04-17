@@ -199,27 +199,34 @@ def plot_2D_data(lon,lat,data,name="Test"):
     plt.savefig("Images/%s.pdf"%name,dpi=300 )
 
 
-def plot_field_on_map(lat,lon,field):
-    fig = plt.figure(figsize=(16, 9))
-    m = Basemap(projection='cyl', llcrnrlat=-85, urcrnrlat=85, llcrnrlon=-180, urcrnrlon=180, resolution=None)
-    m = Basemap(projection="mill", lon_0=180)
+def plot_field_on_map(lat,lon,field,title=""):
+    fig = plt.figure(figsize=(8,5))
+    # m = Basemap(projection='cyl', llcrnrlat=-85, urcrnrlat=85, llcrnrlon=-180, urcrnrlon=180, resolution=None)
+    m = Basemap(projection="mill", lon_0=0)
     parallels = np.arange(-180., 180., 45.)
     meridians = np.arange(-120., 140., 60.)
 
-    m.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=20)
-    m.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=0, xoffset=-18)
+    m.drawmeridians(meridians, labels=[0, 0, 0, 1])
+    m.drawparallels(parallels, labels=[1, 0, 0, 0] )
 
     # m.drawlsmask(land_color="dimgrey", ocean_color="white", lakes=True)
     m.drawcoastlines()
     m.drawmapboundary(fill_color='aqua')
-    m.fillcontinents(color='coral', lake_color='aqua')
+    # m.fillcontinents(color='coral', lake_color='aqua', alpha=0.5)
     ny,nx = field.shape
     lons,lats = m.makegrid(nx,ny)
     x,y = m(lons,lats)
     # print(x)
     # print(x.shape)
-    # m.contourf(x,y,field)
+    cs = m.contourf(x,y,field)
+    cb = m.colorbar(cs,location="bottom",pad="5%",label="Precipitation")
+    # plt.tight_layout()
+    # plt.gca()
+    # plt.subplots_adjust(bottom=-0.8)
+    plt.savefig("Images/map.png",dpi=300)
     plt.show()
+    plt.close()
+
 
 def get_overall_time(files,var,mode="sum"):
 
