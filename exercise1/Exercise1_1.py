@@ -184,7 +184,63 @@ def exercise5(file_list,data_lats):
         subtropical_cl = np.mean(cl_dayly[:,sub_low:sub_high])
         print("Subtropical Mean %s Precipitation: %.2f kg/m2" % (name, subtropical_cl))
 
+def exercise6(files,lon,lat):
+    nc = Dataset(files[1])
+    data = nc.variables["tot_prec"][0,:,:].copy()
+    nc.close()
 
+    plot_2D_data(lon,lat,data,"Task6")
+
+def plot_2D_data(lon,lat,data,name="Test"):
+    fig,ax = plt.subplots()
+    im = ax.contourf(lon,lat,data)
+    plt.colorbar(im)
+    plt.show()
+    plt.savefig("Images/%s.pdf"%name,dpi=300 )
+
+
+def plot_field_on_map(lat,lon,field):
+    fig = plt.figure(figsize=(16, 9))
+    m = Basemap(projection='cyl', llcrnrlat=-85, urcrnrlat=85, llcrnrlon=-180, urcrnrlon=180, resolution=None)
+    m = Basemap(projection="mill", lon_0=180)
+    parallels = np.arange(-180., 180., 45.)
+    meridians = np.arange(-120., 140., 60.)
+
+    m.drawmeridians(meridians, labels=[0, 0, 0, 1], fontsize=20)
+    m.drawparallels(parallels, labels=[1, 0, 0, 0], fontsize=0, xoffset=-18)
+
+    # m.drawlsmask(land_color="dimgrey", ocean_color="white", lakes=True)
+    m.drawcoastlines()
+    m.drawmapboundary(fill_color='aqua')
+    m.fillcontinents(color='coral', lake_color='aqua')
+    ny,nx = field.shape
+    lons,lats = m.makegrid(nx,ny)
+    x,y = m(lons,lats)
+    # print(x)
+    # print(x.shape)
+    # m.contourf(x,y,field)
+    plt.show()
+
+def get_overall_time(files,var,mode="sum"):
+
+    for file in files:
+        nc = Dataset(file)
+        if not "array" in locals():
+            array = nc.variables[var][:].copy()
+        else:
+            array = np.add(array,nc.variables[var][:].copy())
+
+        nc.close()
+
+        if array.ndim == 3:
+            array = array[0,:,:]
+        else:
+            array = array[0,0,:,:]
+
+        if mode == "mean":
+            array = np.divide(array,len(files))
+
+    return array
 
 
 if __name__ == "__main__":
@@ -195,12 +251,17 @@ if __name__ == "__main__":
     files = glob.glob(path + "nh_ape_nwp*ML*.nc")
     print(files)
 
-    nc = Dataset(files[1])
+    nc = Dataset(files[2])
     data_lons = nc.variables["lon"][:].copy()
     data_lats = nc.variables["lat"][:].copy()
     # data_time = nc.variables["time"][:].copy().astype(str)
     # print_nc_info(nc)
     # exercise1(nc)
+    data = nc.variables["tot_prec"][0,:,:].copy()
     nc.close()
 
-    exercise5(files,data_lats)
+    # data = get_overall_time(files,"tot_prec",mode="sum")
+    plot_field_on_map(data_lats,data_lons,data)
+    # plot_2D_data(data_lons,data_lats,data)
+    # exercise6(files,data_lons,data_lats)
+    # exercise5(files,data_lats)
