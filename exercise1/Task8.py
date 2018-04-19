@@ -25,8 +25,8 @@ def exercise8(level_files):
     z = np.mean(z, axis=2) # zonal mean
     print(z.shape)
     fig,ax = plt.subplots()
-    im = ax.contourf(lat,p,z,cmap="bwr")
-    plt.colorbar(im)
+    im = ax.contourf(lat,p,z,cmap="bwr",levels=np.linspace(-0.01,0.01,203))
+    cb = plt.colorbar(im,ticks=np.arange(-0.01,0.011,0.005), label="Vertical Velocity [m/s]")
     ax.set_yscale("log")
     ax.yaxis.set_major_formatter(ScalarFormatter())
     ax.yaxis.set_minor_formatter(ScalarFormatter())
@@ -36,4 +36,4 @@ def exercise8(level_files):
     plt.gca().invert_yaxis()
 
     plt.show()
-    plt.savefig("Task8.pdf")
+    plt.savefig("Images/Task8.pdf")
