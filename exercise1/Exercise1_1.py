@@ -9,12 +9,14 @@ from functions import print_nc_info
 from Task1 import exercise1
 from Task2 import exercise2
 from Task3 import exercise3
-# from Task4 import exercise4  # not yet done
+from Task4 import exercise4
 from Task5 import exercise5
 from Task6 import exercise6
 from Task7 import exercise7
 from Task8 import exercise8
-
+from Task9 import exercise9
+from Task10 import exercise10
+from Task11 import exercise11
 
 
 
@@ -28,12 +30,12 @@ if __name__ == "__main__":
     level_files = glob.glob(path + "nh_ape_nwp*PL*.nc")
     print(files)
 
-    nc = Dataset(files[-1])
+    nc = Dataset(files[1])
     data_lons = nc.variables["lon"][:].copy()
     data_lats = nc.variables["lat"][:].copy()
     # data_time = nc.variables["time"][:].copy().astype(str)
     print_nc_info(nc)
-    # exercise1(nc)
+    exercise1(nc)
     # data = nc.variables["tot_prec"][0,:,:].copy()
     nc.close()
 
@@ -44,4 +46,4 @@ if __name__ == "__main__":
     # plot_2D_data(data_lons,data_lats,data)
     # exercise6(files,data_lons,data_lats)
     # exercise5(files,data_lats)
-    exercise8(level_files)
+    exercise4(files)

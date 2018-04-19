@@ -44,22 +44,13 @@ def get_monthly_mean(var,file_list):
 
 
 
-
-
-
-
-
-
-
-
-
-
 def plot_2D_data(lon,lat,data,name="Test"):
     fig,ax = plt.subplots()
     im = ax.contourf(lon,lat,data)
     plt.colorbar(im)
     plt.show()
     plt.savefig("Images/%s.pdf"%name,dpi=300 )
+    plt.close()
 
 
 def plot_field_on_map(lat,lon,field,title=""):

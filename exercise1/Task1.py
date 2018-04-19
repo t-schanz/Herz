@@ -17,11 +17,11 @@ def exercise1(nc,data_lats):
     ax.set_title("Zonal Mean Sfc Temperature")
     # ax.set_xlim(-90,90)
     ax.set_ylim(270, 300)
-    ax.set_xlabel("Latitude [°N]")
+    ax.set_xlabel("Latitude")
     ax.set_ylabel("Temperature [K]")
     ax.grid()
 
     plt.tight_layout()
     # plt.show()
-    plt.savefig("Images/Task1.pdf",dpi=300)
+    plt.savefig("Images/Task1.pdf")
     plt.close()

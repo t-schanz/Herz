@@ -66,5 +66,6 @@ def exercise7(file_list,level_file_list,lon,lat):
     ax.set_title("Monthly Mean Precipitation and \n Horizontal Wind at Surface (February )")
     plt.show()
     name="Task7"
-    plt.savefig("Images/%s.pdf"%name,dpi=300 )
+    plt.savefig("Images/%s.pdf"%name)
+    plt.close()
 
