@@ -57,13 +57,13 @@ def exercise7(file_list,level_file_list,lon,lat):
 
 
     fig,ax = plt.subplots()
-    im = ax.contourf(lon,lat,prec_feb,levels=np.linspace(0,30,31))
-    plt.colorbar(im, label="Precipiation [mm/d]")
+    im = ax.contourf(lon,lat,prec_feb,levels=np.linspace(0,25,26),cmap="PuBuGn")
+    plt.colorbar(im, label="Precipitation [mm/m$^2$]")
     ax.quiver(lon[::dist],lat[::dist],u[::dist,::dist],v[::dist,::dist],color="white",linewidth=10,
               antialiased=True,alpha=0.8)
     ax.set_xlabel("Lonitude")
     ax.set_ylabel("Latitude")
-    ax.set_title("Monthly Mean Precipitation and \n Horizontal Wind at Surface (February )")
+    ax.set_title("Monthly Mean Precipitation and \n Horizontal Wind at Surface (February)")
     plt.show()
     name="Task7"
     plt.savefig("Images/%s.pdf"%name)

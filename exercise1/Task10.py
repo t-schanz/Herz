@@ -52,17 +52,17 @@ def exercise10(level_files):
     ci = np.multiply(ci,1e5)
     rh = mean_me(rh)
 
-    # plot_zonal(lat,p,cw,"Cloud Water","cloud water [10$^{-5}$ kg/kg]",cmap="Blues",
-    #            levels = np.linspace(0,7,14),
-    #            ticks=np.arange(0,8,1))
-    #
-    # plot_zonal(lat,p,ci,"Cloud Ice","cloud ice [10$^{-5}$ kg/kg]",cmap="Blues",
-    #            levels = np.linspace(0,1,11),
-    #            ticks=np.arange(0,1.1,0.1))
-    #
-    # plot_zonal(lat,p,rh,"Relative Humidity","relative humidity [%]",cmap="Blues",
-    #            levels = np.linspace(0,100,21),
-    #            ticks=np.arange(0,101,20))
+    plot_zonal(lat,p,cw,"Cloud Water","cloud water [10$^{-5}$ kg/kg]",cmap="Blues",
+               levels = np.linspace(0,7,14),
+               ticks=np.arange(0,8,1))
+
+    plot_zonal(lat,p,ci,"Cloud Ice","cloud ice [10$^{-5}$ kg/kg]",cmap="Blues",
+               levels = np.linspace(0,1,11),
+               ticks=np.arange(0,1.1,0.1))
+
+    plot_zonal(lat,p,rh,"Relative Humidity","relative humidity [%]",cmap="Blues",
+               levels = np.linspace(0,100,21),
+               ticks=np.arange(0,101,20))
 
     # Define cloud where rh >= 99%
     threshold = 99

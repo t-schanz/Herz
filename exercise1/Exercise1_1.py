@@ -1,3 +1,5 @@
+import matplotlib
+matplotlib.use('agg')
 from socket import gethostname
 from netCDF4 import Dataset
 import glob
@@ -35,15 +37,17 @@ if __name__ == "__main__":
     data_lats = nc.variables["lat"][:].copy()
     # data_time = nc.variables["time"][:].copy().astype(str)
     print_nc_info(nc)
-    exercise1(nc)
+    # exercise1(nc,data_lats)
     # data = nc.variables["tot_prec"][0,:,:].copy()
     nc.close()
 
-    # data = np.divide(data,len(files))
-    # exercise6(files,data_lats)
-    # data = get_overall_time(files,"tot_prec",mode="mean")
-    # plot_field_on_map(data_lats,data_lons,data)
-    # plot_2D_data(data_lons,data_lats,data)
-    # exercise6(files,data_lons,data_lats)
-    # exercise5(files,data_lats)
+    exercise2(files,data_lats)
+    exercise3(files,data_lats)
     exercise4(files)
+    exercise5(files,data_lats)
+    # exercise6(files,data_lons,data_lats) #not usefull
+    exercise7(files,level_files,data_lons,data_lats)
+    exercise8(level_files)
+    exercise9(level_files)
+    exercise10(level_files)
+    exercise11(files)

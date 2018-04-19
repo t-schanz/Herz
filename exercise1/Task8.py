@@ -39,4 +39,4 @@ def exercise8(level_files):
 
     plt.show()
     plt.savefig("Images/Task8.pdf")
-    plt.cloe()
+    plt.close()

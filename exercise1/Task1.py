@@ -16,7 +16,7 @@ def exercise1(nc,data_lats):
     ax.plot(data_lats, zonal_mean_sfc_T, lw=2)
     ax.set_title("Zonal Mean Sfc Temperature")
     # ax.set_xlim(-90,90)
-    ax.set_ylim(270, 300)
+    ax.set_ylim(270, 310)
     ax.set_xlabel("Latitude")
     ax.set_ylabel("Temperature [K]")
     ax.grid()

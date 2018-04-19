@@ -39,12 +39,15 @@ def exercise4(files):
     large = mean_me(large)
 
     fig,ax = plt.subplots()
-    ax.plot(lat,tot,label="Total")
-    ax.plot(lat, conv, label="Convective")
+    ax.plot(lat,tot,label="total")
+    ax.plot(lat, conv, label="convective")
     ax.plot(lat, large,label="large-scale")
-    ax.title("")
+    ax.set_title("Zonal Mean Precipitation (February)")
+    ax.set_xlabel("Latitude")
+    ax.set_ylabel("Precipitation [mm/m2]")
     ax.set_xlim(-90,90)
     ax.set_ylim(0,20)
+
     plt.legend(loc="upper right")
 
     plt.show()

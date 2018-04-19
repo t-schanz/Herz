@@ -34,14 +34,20 @@ def exercise2(file_list,data_lats):
     # plotting results:
     months = np.asarray(months)
 
-    ticks = [0.5,1.5]
-    labels = ["January","February"]
+
     print(data_lats.shape)
     fig2,ax = plt.subplots()
-    im = ax.pcolor(data_lats,np.arange(0,3),cl_monthly)
-    plt.yticks(ticks,labels)
-    plt.colorbar(im, label="Cloud Fraction [%]")
+    ax.plot(data_lats,cl_monthly[0],label="January")
+    ax.plot(data_lats,cl_monthly[1],label="February")
+    # im = ax.pcolor(data_lats,np.arange(0,3),cl_monthly)
+    # plt.yticks(ticks,labels)
+    # plt.colorbar(im, label="Cloud Fraction [%]")
     ax.set_xlabel("Latitude")
+    ax.set_ylabel("Cloud Fraction [%]")
+    ax.set_title("Monthly zonal mean cloud Fraction")
+    ax.set_xlim(-90,90)
+    ax.set_ylim(0,100)
+    plt.legend(loc="best")
     plt.show()
     plt.savefig("Images/Task2.pdf")
     plt.close()
